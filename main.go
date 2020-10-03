@@ -14,6 +14,7 @@ var (
 
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
+
 	if err := homeTemplate.Execute(w, nil); err != nil {
 		panic(err)
 	}
@@ -27,7 +28,7 @@ func contact(w http.ResponseWriter, r *http.Request) {
 }
 func faq(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, "<ul><li><strong>Q: Is this course hard?</strong> A: Not so, in fact, it's pretty easy for now.</li><li><strong>Q: Is this course mqde for me?</strong> A: You've got a 30 days cashback guarantee.</li><li><strong>Q: What about beginners?</strong> A: This course is tailored to fit for both beginners and more advanced developers.</li><li><strong>Q: Why is it not like, 10 bucks or so like Udemy?</strong> A: Because I really worked to produce this one.</li></ul>")
+	_, _ = fmt.Fprint(w, "<ul><li><strong>Q: Is this course hard?</strong> A: Not so, in fact, it's pretty easy for now.</li><li><strong>Q: Is this course mqde for me?</strong> A: You've got a 30 days cashback guarantee.</li><li><strong>Q: What about beginners?</strong> A: This course is tailored to fit for both beginners and more advanced developers.</li><li><strong>Q: Why is it not like, 10 bucks or so like Udemy?</strong> A: Because I really worked to produce this one.</li></ul>")
 }
 
 func four_oh_four(w http.ResponseWriter, r *http.Request) {
@@ -37,11 +38,11 @@ func four_oh_four(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	var err error
-	homeTemplate, err = template.ParseFiles("views/home.gohtml")
+	homeTemplate, err = template.ParseFiles("views/home.gohtml", "views/layouts/footer.gohtml")
 	if err != nil {
 		panic(err)
 	}
-	contactTemplate, err = template.ParseFiles("views/contact.gohtml")
+	contactTemplate, err = template.ParseFiles("views/contact.gohtml", "views/layouts/footer.gohtml")
 	if err != nil {
 		panic(err)
 	}
